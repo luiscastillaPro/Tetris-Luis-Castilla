@@ -1,12 +1,50 @@
+/* Ajustes de la página para centrar el contenido */
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f2f3f5; /* Fondo suave */
+}
 
-/* 
+/* CSS */
 
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
+/* Estilos para el contenedor del tablero */
+.tablero-juego {
+    position: relative;  /* Hacemos que las piezas sean relativas a este contenedor */
+    width: 390px;  /* 13 columnas * 30px */
+    height: 660px;  /* 22 filas * 30px */
+    border: 2px solid black; /* Borde del tablero para visualizar */
+    background-color: #fff; /* Fondo blanco para diferenciarlo del fondo de la página */
+  }
+  
+/* Estilos para las filas del tablero */
+.fila {
+    display: flex;
+    width: 100%;
+}
 
-*/
+/* Estilos para las celdas del tablero */
+.celda {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ccc; /* Borde entre celdas */
+    box-sizing: border-box; /* Asegura que el borde no se agregue al tamaño de la celda */
+}
+
+/* Estilos para las piezas */
+.fila-pieza {
+    display: flex;
+}
+
+.celda-pieza {
+    width: 30px;
+    height: 30px;
+    box-sizing: border-box;  /* Evitar que el borde afecte las dimensiones de las celdas */
+}
+
+.celda-activa {
+    background-color: red; /* Color de las celdas activas de la pieza */
+}
+  
