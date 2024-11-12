@@ -4,9 +4,9 @@ const Pieza = ({ forma, posicion }) => {
   return (
     <div
       style={{
-        position: 'absolute', // Posiciona la pieza con respecto a su contenedor
-        top: posicion.y * 30,  // Desplazamiento vertical (según filas)
-        left: posicion.x * 30, // Desplazamiento horizontal (según columnas)
+        position: 'absolute',
+        top: posicion.y * 30,  
+        left: posicion.x * 30, 
       }}
     >
       {forma.map((fila, indiceFila) => (
@@ -16,8 +16,8 @@ const Pieza = ({ forma, posicion }) => {
               key={indiceCelda}
               className={`celda-pieza ${celda ? 'celda-activa' : ''}`}
               style={{
-                width: 30,   // Tamaño de cada celda de la pieza
-                height: 30,  // Tamaño de cada celda de la pieza
+                width: 30,  
+                height: 30, 
               }}
             />
           ))}

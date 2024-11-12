@@ -1,50 +1,113 @@
-/* Ajustes de la página para centrar el contenido */
-body, html {
-    height: 100%;
+  body, html {
     margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f2f3f5; /* Fondo suave */
+    padding: 0;
+    background-color: #080633;
+    color: white;
+    width: 60vw;
+    margin: auto;
+    text-align: center;
 }
 
-/* CSS */
+.tablero-puntaje{
+    display: flex;
+    justify-content: center;
+    background-color: rgb(63, 63, 203);
+    margin-bottom: 1rem;
+    align-items: center;
+    border-radius: 10px;
+}
 
-/* Estilos para el contenedor del tablero */
+.imagen-portada {
+    width: 440px; 
+    margin: 0 3rem; 
+}
+
+.imagen-portada img {
+    width: 100%;       
+    height: auto; 
+    object-fit: contain;
+}
+
+.puntajes{
+    width: 15rem;
+    font-weight: bold;
+    border: 5px solid #1b186e;
+    font-size: 2rem;
+    height: 7rem;
+}
+
+.puntajes h2{
+   color: rgb(4, 238, 255);
+   background-color: #1b186e;
+   font-size: 1.5rem;
+   padding: 0.5rem 0;
+   font-weight: bold;
+}
+
+.tablero-container{
+    display: flex;
+}
+
+.ficha-guardada, .ficha-siguiente{
+    margin-top: 10vh;
+    border: 5px solid white;
+    height: 25vh;
+    border-radius: 10px;
+}
+
+.ficha-siguiente h2, .ficha-guardada h2{
+    margin: 0.5rem 2rem;
+}
+
 .tablero-juego {
-    position: relative;  /* Hacemos que las piezas sean relativas a este contenedor */
-    width: 390px;  /* 13 columnas * 30px */
-    height: 660px;  /* 22 filas * 30px */
-    border: 2px solid black; /* Borde del tablero para visualizar */
-    background-color: #fff; /* Fondo blanco para diferenciarlo del fondo de la página */
-  }
-  
-/* Estilos para las filas del tablero */
+    max-width: 440px;
+    margin: auto;
+    position: relative;  
+    border: 10px solid rgb(76, 64, 255);
+    background-color: #1b186e; 
+}
+
 .fila {
     display: flex;
     width: 100%;
 }
 
-/* Estilos para las celdas del tablero */
 .celda {
     width: 30px;
     height: 30px;
-    border: 1px solid #ccc; /* Borde entre celdas */
-    box-sizing: border-box; /* Asegura que el borde no se agregue al tamaño de la celda */
-}
+    box-sizing: border-box;
 
-/* Estilos para las piezas */
-.fila-pieza {
-    display: flex;
-}
-
-.celda-pieza {
-    width: 30px;
-    height: 30px;
-    box-sizing: border-box;  /* Evitar que el borde afecte las dimensiones de las celdas */
-}
-
-.celda-activa {
-    background-color: red; /* Color de las celdas activas de la pieza */
-}
+  }
+  
+  .celda-activa-cuadrado {
+    background-color: #ff6347; 
+  }
+  
+  .celda-activa-L1 {
+    background-color: #4682b4; 
+  }
+  
+  .celda-activa-L2 {
+    background-color: #32cd32; 
+  }
+  
+  .celda-activa-T {
+    background-color: #ff4500;
+  }
+  
+  .celda-activa-linea {
+    background-color: #8a2be2;
+  }
+  
+  .celda-activa-S {
+    background-color: #00fa9a; 
+  }
+  
+  .celda-activa-Z {
+    background-color: #ff1493; 
+  }
+  
+  .celda-ocupada {
+    background-color: #fbff00; 
+  }
   
