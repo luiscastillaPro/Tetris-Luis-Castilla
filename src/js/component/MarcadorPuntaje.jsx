@@ -1,7 +1,7 @@
 import React from 'react';
 import portada from "../../img/portada.png";
 
-const MarcadorPuntaje = () => {
+const MarcadorPuntaje = ({ filasEliminadas  }) => {
     return (
         <div className="tablero-puntaje">
             <div className='puntajes'>
@@ -13,7 +13,7 @@ const MarcadorPuntaje = () => {
             </div>
             <div className='puntajes'>
                 <h2>Record</h2>
-                <p>15 lineas</p>
+                <p>{filasEliminadas} líneas</p>
             </div>
         </div>
     );

@@ -1,4 +1,5 @@
-  body, html {
+  body,
+  html {
     margin: 0;
     padding: 0;
     background-color: #080633;
@@ -6,108 +7,139 @@
     width: 60vw;
     margin: auto;
     text-align: center;
-}
+  }
 
-.tablero-puntaje{
+  .tablero-puntaje {
     display: flex;
     justify-content: center;
     background-color: rgb(63, 63, 203);
     margin-bottom: 1rem;
     align-items: center;
     border-radius: 10px;
-}
+  }
 
-.imagen-portada {
-    width: 440px; 
-    margin: 0 3rem; 
-}
+  .imagen-portada {
+    width: 440px;
+    margin: 0 3rem;
+  }
 
-.imagen-portada img {
-    width: 100%;       
-    height: auto; 
+  .imagen-portada img {
+    width: 100%;
+    height: auto;
     object-fit: contain;
-}
+  }
 
-.puntajes{
+  .puntajes {
     width: 15rem;
     font-weight: bold;
     border: 5px solid #1b186e;
     font-size: 2rem;
     height: 7rem;
-}
+  }
 
-.puntajes h2{
-   color: rgb(4, 238, 255);
-   background-color: #1b186e;
-   font-size: 1.5rem;
-   padding: 0.5rem 0;
-   font-weight: bold;
-}
+  .puntajes h2 {
+    color: rgb(4, 238, 255);
+    background-color: #1b186e;
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
+    font-weight: bold;
+  }
 
-.tablero-container{
+  .tablero-container {
     display: flex;
+  }
+
+  .ficha-guardada {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    padding: 10px;
 }
 
-.ficha-guardada, .ficha-siguiente{
+  .ficha-guardada,
+  .ficha-siguiente {
     margin-top: 10vh;
     border: 5px solid white;
-    height: 25vh;
+    height: 20vh;
     border-radius: 10px;
-}
+  }
 
-.ficha-siguiente h2, .ficha-guardada h2{
+  .ficha-siguiente h2,
+  .ficha-guardada h2 {
     margin: 0.5rem 2rem;
-}
+  }
 
-.tablero-juego {
+  .tablero-juego {
     max-width: 440px;
     margin: auto;
-    position: relative;  
+    position: relative;
     border: 10px solid rgb(76, 64, 255);
-    background-color: #1b186e; 
-}
+    background-color: #1b186e;
+  }
 
-.fila {
+  .fila {
     display: flex;
     width: 100%;
-}
+  }
 
-.celda {
+  .celda {
     width: 30px;
     height: 30px;
     box-sizing: border-box;
+    border: 1PX solid rgba(0, 0, 0, 0.13);
+  }
 
-  }
-  
   .celda-activa-cuadrado {
-    background-color: #ff6347; 
+    background-color: #ff6347;
   }
-  
+
   .celda-activa-L1 {
-    background-color: #4682b4; 
+    background-color: #4682b4;
   }
-  
+
   .celda-activa-L2 {
-    background-color: #32cd32; 
+    background-color: #32cd32;
   }
-  
+
   .celda-activa-T {
     background-color: #ff4500;
   }
-  
+
   .celda-activa-linea {
     background-color: #8a2be2;
   }
-  
+
   .celda-activa-S {
-    background-color: #00fa9a; 
+    background-color: #00fa9a;
   }
-  
+
   .celda-activa-Z {
-    background-color: #ff1493; 
+    background-color: #ff1493;
   }
-  
+
   .celda-ocupada {
-    background-color: #fbff00; 
+    background-color: #fbff00;
   }
-  
+
+.miniatura-pieza {
+    width: 120px; /* Ajustamos el tamaño de la miniatura */
+    height: 120px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+  .ficha-guardada h2 {
+    margin: 0.5rem 0;
+  }
+
+  .pieza .fila-pieza {
+    display: flex;
+}
+
+.pieza .celda-pieza {
+    width: 30px; /* Ajusta el tamaño de las celdas en la miniatura */
+    height: 30px;
+    box-sizing: border-box;
+}

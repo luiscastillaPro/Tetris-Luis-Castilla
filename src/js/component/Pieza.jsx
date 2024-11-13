@@ -1,24 +1,22 @@
 import React from 'react';
 
-const Pieza = ({ forma, posicion }) => {
+const Pieza = ({ forma, posicion, clase = '', esMiniatura = false, tipoPieza }) => {
   return (
-    <div
+    <div 
+      className={`pieza ${clase}`} 
       style={{
-        position: 'absolute',
-        top: posicion.y * 30,  
-        left: posicion.x * 30, 
+        position: esMiniatura ? 'relative' : 'absolute',
+        top: esMiniatura ? 'auto' : posicion.y * 30,
+        left: esMiniatura ? 'auto' : posicion.x * 30, 
+        display: 'inline-block',
       }}
     >
       {forma.map((fila, indiceFila) => (
-        <div key={indiceFila} className="fila-pieza">
+        <div key={indiceFila} className="fila-pieza" style={{ display: 'flex' }}>
           {fila.map((celda, indiceCelda) => (
             <div
               key={indiceCelda}
-              className={`celda-pieza ${celda ? 'celda-activa' : ''}`}
-              style={{
-                width: 30,  
-                height: 30, 
-              }}
+              className={`celda-pieza ${celda ? `celda-activa-${tipoPieza}` : ''}`}
             />
           ))}
         </div>
