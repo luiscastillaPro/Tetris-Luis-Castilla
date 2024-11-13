@@ -30,7 +30,7 @@
   }
 
   .puntajes {
-    width: 15rem;
+    width: 12rem;
     font-weight: bold;
     border: 5px solid #1b186e;
     font-size: 2rem;
@@ -57,6 +57,14 @@
     padding: 10px;
 }
 
+.ficha-siguiente {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  padding: 10px;
+}
+
   .ficha-guardada,
   .ficha-siguiente {
     margin-top: 10vh;
@@ -68,6 +76,10 @@
   .ficha-siguiente h2,
   .ficha-guardada h2 {
     margin: 0.5rem 2rem;
+  }
+
+  .ficha-siguiente{
+    margin: 0;
   }
 
   .tablero-juego {
@@ -143,3 +155,10 @@
     height: 30px;
     box-sizing: border-box;
 }
+
+.tabler-punticos{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+

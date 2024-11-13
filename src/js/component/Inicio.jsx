@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import TableroJuego from './TableroJuego.jsx';
 import MarcadorPuntaje from './MarcadorPuntaje.jsx';
 import Controles from './Controles.jsx';
+// import Audio from "../../img/Tetris.mp3";
 
 const piezasDisponibles = [
     {
@@ -59,15 +60,18 @@ const Inicio = () => {
     const columnas = 14;
     const [tablero, setTablero] = useState(Array.from({ length: filas }, () => Array(columnas).fill(0)));
     const [piezaFija, setPiezaFija] = useState(false);
+    const [puntaje, setPuntaje] = useState(0);
+    const [nivel, setNivel] = useState(1);
     const [filasEliminadas, setFilasEliminadas] = useState(0);
     const [piezaGuardada, setPiezaGuardada] = useState(null);
     const [pieza, setPieza] = useState(generarPiezaAleatoria());
+    const [siguientePieza, setSiguientePieza] = useState(generarPiezaAleatoria()); // Estado para la siguiente pieza
 
     function generarPiezaAleatoria() {
         const piezaRandom = piezasDisponibles[Math.floor(Math.random() * piezasDisponibles.length)];
-        return { 
-            ...piezaRandom, 
-            posicion: { x: Math.floor((columnas - piezaRandom.forma[0].length) / 2), y: 0 } 
+        return {
+            ...piezaRandom,
+            posicion: { x: Math.floor((columnas - piezaRandom.forma[0].length) / 2), y: 0 }
         };
     }
 
@@ -99,7 +103,7 @@ const Inicio = () => {
                 }
                 : generarPiezaAleatoria();
             setPiezaGuardada(prevPieza);
-            return piezaIntercambiada; 
+            return piezaIntercambiada;
         });
     };
 
@@ -138,22 +142,24 @@ const Inicio = () => {
 
     const eliminarFilasCompletas = (tableroActual) => {
         const nuevoTablero = tableroActual.filter(fila => fila.some(celda => celda === 0));
-    
+
         const filasEliminadasEstaVez = filas - nuevoTablero.length;
-    
+
         setFilasEliminadas(prev => prev + filasEliminadasEstaVez);
-    
+
+        const puntajeNuevo = filasEliminadasEstaVez * 10;
+        setPuntaje(prev => prev + puntajeNuevo);
+
         while (nuevoTablero.length < filas) {
             nuevoTablero.unshift(new Array(columnas).fill(0));
         }
-    
+
         return nuevoTablero;
     };
 
     const fijarPieza = (pieza) => {
         const nuevoTablero = [...tablero];
 
-        // Añadir la pieza al tablero
         for (let i = 0; i < pieza.forma.length; i++) {
             for (let j = 0; j < pieza.forma[i].length; j++) {
                 if (pieza.forma[i][j] === 1) {
@@ -162,27 +168,24 @@ const Inicio = () => {
             }
         }
 
-        // Eliminar filas completas y actualizar el tablero
         const tableroConFilasEliminadas = eliminarFilasCompletas(nuevoTablero);
         setTablero(tableroConFilasEliminadas);
 
-        // Marcar que la pieza está fijada y preparar la siguiente
         setPiezaFija(true);
     };
 
     const generarNuevaPieza = () => {
-        setPieza({
-            tipo: piezasDisponibles[Math.floor(Math.random() * piezasDisponibles.length)].tipo,
-            forma: piezasDisponibles[Math.floor(Math.random() * piezasDisponibles.length)].forma,
-            posicion: { x: Math.floor((columnas - 2) / 2), y: 0 }
-        });
+        setPieza(siguientePieza);
+
+        setSiguientePieza(generarPiezaAleatoria());
+
         setPiezaFija(false);
     };
 
     const bajarPiezaRapidamente = () => {
         setPieza((prevPieza) => {
             let nuevaPosicion = { ...prevPieza.posicion };
-            
+
             while (!colisionConFondo(prevPieza, { x: nuevaPosicion.x, y: nuevaPosicion.y + 1 })) {
                 nuevaPosicion.y += 1;
             }
@@ -195,7 +198,13 @@ const Inicio = () => {
     };
 
     useEffect(() => {
-        const intervalo = setInterval(() => moverPiezaAbajo(), 1000);
+        if (filasEliminadas >= 10 * nivel) {
+            setNivel((prevNivel) => prevNivel + 1);
+        }
+    }, [filasEliminadas, nivel]);
+
+    useEffect(() => {
+        const intervalo = setInterval(() => moverPiezaAbajo(), 1000 - (nivel - 1) * 100);
         const handleKeyDown = (event) => {
             if (event.key === "ArrowDown") moverPieza('abajo');
             else if (event.key === "ArrowLeft") moverPieza('izquierda');
@@ -209,13 +218,19 @@ const Inicio = () => {
             clearInterval(intervalo);
             window.removeEventListener("keydown", handleKeyDown);
         };
-    }, [pieza, piezaGuardada]);
+    }, [pieza, piezaGuardada, nivel]);
 
     return (
         <div className="app">
-            <MarcadorPuntaje filasEliminadas={filasEliminadas} />
+            <MarcadorPuntaje filasEliminadas={filasEliminadas} puntaje={puntaje} nivel={nivel} />
             <div className="contenedor-juego">
-                <TableroJuego pieza={pieza} tablero={tablero} piezaGuardada={piezaGuardada} />
+                <TableroJuego
+                    pieza={pieza}
+                    tablero={tablero}
+                    piezaGuardada={piezaGuardada}
+                    siguientePieza={siguientePieza}
+                    nivel={nivel}
+                />
             </div>
             <Controles moverPieza={moverPieza} />
         </div>
