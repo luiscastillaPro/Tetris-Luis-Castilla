@@ -49,39 +49,6 @@
     display: flex;
   }
 
-  .ficha-guardada {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: start;
-    padding: 10px;
-}
-
-.ficha-siguiente {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-  padding: 10px;
-}
-
-  .ficha-guardada,
-  .ficha-siguiente {
-    margin-top: 10vh;
-    border: 5px solid white;
-    height: 20vh;
-    border-radius: 10px;
-  }
-
-  .ficha-siguiente h2,
-  .ficha-guardada h2 {
-    margin: 0.5rem 2rem;
-  }
-
-  .ficha-siguiente{
-    margin: 0;
-  }
-
   .tablero-juego {
     max-width: 440px;
     margin: auto;
@@ -137,9 +104,9 @@
 .miniatura-pieza {
     width: 120px; /* Ajustamos el tamaño de la miniatura */
     height: 120px; 
+    margin: auto;
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
   .ficha-guardada h2 {
@@ -160,5 +127,33 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+}
+
+.nivel-maximo{
+  font-size: 6rem;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+}
+
+.titulo-nivel, .titul-siguiente, .titul-control, .reservi-titul {
+  margin: 0;
+  font-size: 2.5rem;
+  border-bottom: 3px solid white;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 1rem 2rem;
+}
+
+.tablero-nivel, .ficha-siguiente, .tabler-control, .ficha-guardada{
+  border: 3px solid white;
+  border-radius: 10px;
+  width: 12vw;
+}
+
+.titul-siguiente{
+  font-size: 1.8rem;
 }
 
