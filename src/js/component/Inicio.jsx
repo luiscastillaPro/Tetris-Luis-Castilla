@@ -61,8 +61,10 @@ const Inicio = () => {
     const [tablero, setTablero] = useState(Array.from({ length: filas }, () => Array(columnas).fill(0)));
     const [piezaFija, setPiezaFija] = useState(false);
     const [puntaje, setPuntaje] = useState(0);
+    const [juegoTerminado, setJuegoTerminado] = useState(false);
     const [nivel, setNivel] = useState(1);
     const [filasEliminadas, setFilasEliminadas] = useState(0);
+    const [juegoIniciado, setJuegoIniciado] = useState(false); 
     const [piezaGuardada, setPiezaGuardada] = useState(null);
     const [pieza, setPieza] = useState(generarPiezaAleatoria());
     const [siguientePieza, setSiguientePieza] = useState(generarPiezaAleatoria()); // Estado para la siguiente pieza
@@ -108,20 +110,17 @@ const Inicio = () => {
     };
 
     const moverPiezaAbajo = () => {
+        if (juegoTerminado) return; // No mover piezas si el juego ha terminado
+    
         setPieza((prevPieza) => {
             let nuevaPosicion = { ...prevPieza.posicion };
-
             if (!colisionConFondo(prevPieza, { x: nuevaPosicion.x, y: nuevaPosicion.y + 1 })) {
                 nuevaPosicion.y += 1;
                 return { ...prevPieza, posicion: nuevaPosicion };
             } else {
                 fijarPieza(prevPieza);
                 generarNuevaPieza();
-                return {
-                    forma: piezasDisponibles[Math.floor(Math.random() * piezasDisponibles.length)].forma,
-                    tipo: piezasDisponibles[Math.floor(Math.random() * piezasDisponibles.length)].tipo,
-                    posicion: { x: Math.floor((columnas - 2) / 2), y: 0 }
-                };
+                return prevPieza;
             }
         });
     };
@@ -175,11 +174,15 @@ const Inicio = () => {
     };
 
     const generarNuevaPieza = () => {
-        setPieza(siguientePieza);
-
-        setSiguientePieza(generarPiezaAleatoria());
-
-        setPiezaFija(false);
+        // Verifica si la siguiente pieza colisiona al generarse en la parte superior
+        const nuevaPieza = siguientePieza;
+        if (colisionConFondo(nuevaPieza, nuevaPieza.posicion)) {
+            setJuegoTerminado(true); // Marca el juego como terminado
+        } else {
+            setPieza(nuevaPieza); // Genera la pieza si no hay colisión
+            setSiguientePieza(generarPiezaAleatoria()); // Prepara la próxima pieza
+            setPiezaFija(false);
+        }
     };
 
     const bajarPiezaRapidamente = () => {
@@ -204,7 +207,10 @@ const Inicio = () => {
     }, [filasEliminadas, nivel]);
 
     useEffect(() => {
+        if (!juegoIniciado || juegoTerminado) return; // Pausa si el juego no ha iniciado o ha terminado
+
         const intervalo = setInterval(() => moverPiezaAbajo(), 1000 - (nivel - 1) * 100);
+
         const handleKeyDown = (event) => {
             if (event.key === "ArrowDown") moverPieza('abajo');
             else if (event.key === "ArrowLeft") moverPieza('izquierda');
@@ -213,26 +219,55 @@ const Inicio = () => {
             else if (event.key === "d" || event.key === "D") bajarPiezaRapidamente();
             else if (event.key === "s" || event.key === "S") manejarReservaPieza();
         };
+
         window.addEventListener("keydown", handleKeyDown);
+
         return () => {
             clearInterval(intervalo);
             window.removeEventListener("keydown", handleKeyDown);
         };
-    }, [pieza, piezaGuardada, nivel]);
+    }, [pieza, piezaGuardada, nivel, juegoIniciado, juegoTerminado]);
+
+    const iniciarJuego = () => {
+        setJuegoIniciado(true);
+        setJuegoTerminado(false);
+        setPuntaje(0);
+        setNivel(1);
+        setFilasEliminadas(0);
+        setTablero(Array.from({ length: filas }, () => Array(columnas).fill(0)));
+        setPieza(generarPiezaAleatoria());
+        setSiguientePieza(generarPiezaAleatoria());
+        setPiezaGuardada(null);
+    };
+
+    const reiniciarJuego = () => {
+        iniciarJuego();
+    };
 
     return (
         <div className="app">
-            <MarcadorPuntaje filasEliminadas={filasEliminadas} puntaje={puntaje} nivel={nivel} />
-            <div className="contenedor-juego">
-                <TableroJuego
-                    pieza={pieza}
-                    tablero={tablero}
-                    piezaGuardada={piezaGuardada}
-                    siguientePieza={siguientePieza}
-                    nivel={nivel}
-                />
-            </div>
-            <Controles moverPieza={moverPieza} />
+            {!juegoIniciado ? (
+                <button onClick={iniciarJuego} className="btn-play">Play</button>
+            ) : juegoTerminado ? (
+                <div className="game-over">
+                    <h1 className='titulo-gamer'>Game Over</h1>
+                    <button onClick={reiniciarJuego} className="btn-reintentar">Volver a Intentarlo</button>
+                </div>
+            ) : (
+                <>
+                    <MarcadorPuntaje filasEliminadas={filasEliminadas} puntaje={puntaje} nivel={nivel} />
+                    <div className="contenedor-juego">
+                        <TableroJuego
+                            pieza={pieza}
+                            tablero={tablero}
+                            piezaGuardada={piezaGuardada}
+                            siguientePieza={siguientePieza}
+                            nivel={nivel}
+                        />
+                    </div>
+                    <Controles moverPieza={moverPieza} />
+                </>
+            )}
         </div>
     );
 };

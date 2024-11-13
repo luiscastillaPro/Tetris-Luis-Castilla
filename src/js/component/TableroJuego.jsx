@@ -8,18 +8,21 @@ const TableroJuego = ({ pieza, tablero, piezaGuardada, siguientePieza, nivel }) 
       <div className="ficha-guardada">
         <h2 className='reservi-titul'>Reserva</h2>
         {piezaGuardada ? (
-          <div className="miniatura-pieza" key={`${piezaGuardada.tipo}-${piezaGuardada.posicion.x}-${piezaGuardada.posicion.y}`}>
+          <div className="miniatura-pieza2" key={`${piezaGuardada.tipo}-${piezaGuardada.posicion.x}-${piezaGuardada.posicion.y}`}>
             <Pieza forma={piezaGuardada.forma} posicion={{ x: 0, y: 0 }} esMiniatura={true} tipoPieza={piezaGuardada.tipo} />
           </div>
         ) : (
-          <p>No hay pieza guardada</p>
+          <p className='sin-reserva'>No hay pieza guardada</p>
         )}
       </div>
       <div className='tabler-control'>
         <h2 className='titul-control'>Controles</h2>
+        <div className='lista-control'>
         <li>S = Reservar</li>
         <li>D = Deslizar</li>
         <li>Espacio = Girar</li>
+
+        </div>
       </div>
 
       </div>
