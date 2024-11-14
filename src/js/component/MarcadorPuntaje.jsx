@@ -1,20 +1,20 @@
 import React from 'react';
 import portada from "../../img/portada.png";
+import "../../styles/puntaje.css";
 
 const MarcadorPuntaje = ({ filasEliminadas, puntaje }) => {
     return (
         <div className="tablero-puntaje">
             <div className='puntajes'>
-                <h2>Puntuacion</h2>
-                <p>{puntaje}</p> {/* Mostrar el puntaje */}
+                <h2 className='puntajes-titul'>Puntuacion</h2>
+                <p>{puntaje}</p>
             </div>
             <div className='imagen-portada'>
-                <img src={portada} alt="Portada" />
+                <img src={portada} alt="Portada" className='portada'/>
             </div>
             <div className='puntajes'>
-                <h2>Record</h2>
+                <h2 className='puntajes-titul'>Record</h2>
                 <p>{filasEliminadas} {filasEliminadas === 1 ? 'línea' : 'líneas'}</p>
-                {/* Condición para singular o plural */}
             </div>
         </div>
     );

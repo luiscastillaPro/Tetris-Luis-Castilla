@@ -1,4 +1,5 @@
 import React from 'react';
+import "../../styles/pieza.css";
 
 const Pieza = ({ forma, posicion, clase = '', esMiniatura = false, tipoPieza }) => {
   return (
@@ -12,7 +13,7 @@ const Pieza = ({ forma, posicion, clase = '', esMiniatura = false, tipoPieza }) 
       }}
     >
       {forma.map((fila, indiceFila) => (
-        <div key={indiceFila} className="fila-pieza" style={{ display: 'flex' }}>
+        <div key={indiceFila} className="fila-pieza">
           {fila.map((celda, indiceCelda) => (
             <div
               key={indiceCelda}

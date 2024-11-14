@@ -1,0 +1,48 @@
+.pieza .fila-pieza {
+    display: flex;
+}
+
+.pieza .celda-pieza {
+    width: 30px;
+    height: 30px;
+    box-sizing: border-box;
+}
+
+.celda {
+    width: 30px;
+    height: 30px;
+    box-sizing: border-box;
+    border: 1PX solid rgba(0, 0, 0, 0.13);
+}
+
+.celda-activa-cuadrado {
+    background-color: #ff6347;
+}
+
+.celda-activa-L1 {
+    background-color: #4682b4;
+}
+
+.celda-activa-L2 {
+    background-color: #32cd32;
+}
+
+.celda-activa-T {
+    background-color: #ff4500;
+}
+
+.celda-activa-linea {
+    background-color: #8a2be2;
+}
+
+.celda-activa-S {
+    background-color: #00fa9a;
+}
+
+.celda-activa-Z {
+    background-color: #ff1493;
+}
+
+.celda-ocupada {
+    background-color: #fbff00;
+}

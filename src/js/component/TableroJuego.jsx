@@ -1,30 +1,32 @@
 import React from 'react';
 import Pieza from './Pieza';
+import "../../styles/tablero.css";
 
-const TableroJuego = ({ pieza, tablero, piezaGuardada, siguientePieza, nivel }) => { 
+const TableroJuego = ({ pieza, tablero, piezaGuardada, siguientePieza, nivel }) => {
   return (
     <div className='tablero-container'>
       <div className='tabler-punticos'>
-      <div className="ficha-guardada">
-        <h2 className='reservi-titul'>Reserva</h2>
-        {piezaGuardada ? (
-          <div className="miniatura-pieza2" key={`${piezaGuardada.tipo}-${piezaGuardada.posicion.x}-${piezaGuardada.posicion.y}`}>
-            <Pieza forma={piezaGuardada.forma} posicion={{ x: 0, y: 0 }} esMiniatura={true} tipoPieza={piezaGuardada.tipo} />
-          </div>
-        ) : (
-          <p className='sin-reserva'>No hay pieza guardada</p>
-        )}
-      </div>
-      <div className='tabler-control'>
-        <h2 className='titul-control'>Controles</h2>
-        <div className='lista-control'>
-        <li>S = Reservar</li>
-        <li>D = Deslizar</li>
-        <li>Espacio = Girar</li>
 
+        <div className="ficha-guardada">
+          <h2 className='reservi-titul'>Reserva</h2>
+          {piezaGuardada ? (
+            <div className="miniatura-pieza2" key={`${piezaGuardada.tipo}-${piezaGuardada.posicion.x}-${piezaGuardada.posicion.y}`}>
+              <Pieza forma={piezaGuardada.forma} posicion={{ x: 0, y: 0 }} esMiniatura={true} tipoPieza={piezaGuardada.tipo} />
+            </div>
+          ) : (
+            <p className='sin-reserva'>No hay pieza guardada</p>
+          )}
         </div>
-      </div>
 
+        <div className='tabler-control'>
+          <h2 className='titul-control'>Controles</h2>
+          <div className='lista-control'>
+            <li>S = Reservar</li>
+            <li>D = Deslizar</li>
+            <li>Espacio = Girar</li>
+          </div>
+        </div>
+        
       </div>
 
       <div className="tablero-juego">
@@ -47,7 +49,7 @@ const TableroJuego = ({ pieza, tablero, piezaGuardada, siguientePieza, nivel }) 
         ))}
         <Pieza forma={pieza.forma} posicion={pieza.posicion} tipoPieza={pieza.tipo} />
       </div>
-      
+
       <div className='tabler-punticos'>
         <div className='ficha-siguiente'>
           <h2 className='titul-siguiente'>Siguiente</h2>

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import TableroJuego from './TableroJuego.jsx';
 import MarcadorPuntaje from './MarcadorPuntaje.jsx';
 import Controles from './Controles.jsx';
+import fondo from "../../img/fondo.jpg";
+import "../../styles/inicio.css";
 // import Audio from "../../img/Tetris.mp3";
 
 const piezasDisponibles = [
@@ -67,7 +69,7 @@ const Inicio = () => {
     const [juegoIniciado, setJuegoIniciado] = useState(false); 
     const [piezaGuardada, setPiezaGuardada] = useState(null);
     const [pieza, setPieza] = useState(generarPiezaAleatoria());
-    const [siguientePieza, setSiguientePieza] = useState(generarPiezaAleatoria()); // Estado para la siguiente pieza
+    const [siguientePieza, setSiguientePieza] = useState(generarPiezaAleatoria());
 
     function generarPiezaAleatoria() {
         const piezaRandom = piezasDisponibles[Math.floor(Math.random() * piezasDisponibles.length)];
@@ -110,7 +112,7 @@ const Inicio = () => {
     };
 
     const moverPiezaAbajo = () => {
-        if (juegoTerminado) return; // No mover piezas si el juego ha terminado
+        if (juegoTerminado) return; 
     
         setPieza((prevPieza) => {
             let nuevaPosicion = { ...prevPieza.posicion };
@@ -174,13 +176,12 @@ const Inicio = () => {
     };
 
     const generarNuevaPieza = () => {
-        // Verifica si la siguiente pieza colisiona al generarse en la parte superior
         const nuevaPieza = siguientePieza;
         if (colisionConFondo(nuevaPieza, nuevaPieza.posicion)) {
-            setJuegoTerminado(true); // Marca el juego como terminado
+            setJuegoTerminado(true);
         } else {
-            setPieza(nuevaPieza); // Genera la pieza si no hay colisión
-            setSiguientePieza(generarPiezaAleatoria()); // Prepara la próxima pieza
+            setPieza(nuevaPieza);
+            setSiguientePieza(generarPiezaAleatoria());
             setPiezaFija(false);
         }
     };
@@ -244,8 +245,16 @@ const Inicio = () => {
         iniciarJuego();
     };
 
+    const estiloFondo = {
+        backgroundImage: `url(${fondo})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        height: "100vh",
+    };
+
     return (
-        <div className="app">
+        <div className="app" style={estiloFondo}>
             {!juegoIniciado ? (
                 <button onClick={iniciarJuego} className="btn-play">Play</button>
             ) : juegoTerminado ? (

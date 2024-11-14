@@ -1,0 +1,52 @@
+.game-over,
+.btn-play-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titulo-gamer,
+.btn-play {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.btn-reintentar,
+.btn-play {
+    background-image: linear-gradient(to bottom, #208020, #32cd32);
+    color: white;
+    font-size: 2rem;
+    padding: 1rem 3rem;
+    border: 3px solid white;
+    border-radius: 10px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-reintentar:hover,
+.btn-play:hover {
+    background-image: linear-gradient(to bottom, #208020, #32cd32);
+}
+
+.titulo-gamer {
+    font-size: 7rem;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    margin-top: 0;
+}
+
+.app {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contenedor-juego {
+    display: flex;
+    justify-content: space-between;
+}

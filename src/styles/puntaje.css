@@ -1,0 +1,26 @@
+.puntajes {
+    width: 12rem;
+    font-weight: bold;
+    border: 5px solid #1b186e;
+    font-size: 2rem;
+    height: 7rem;
+}
+
+.puntajes-titul {
+    color: rgb(4, 238, 255);
+    background-color: #1b186e;
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
+    font-weight: bold;
+}
+
+.imagen-portada {
+    width: 440px;
+    margin: 0 3rem;
+}
+
+.portada {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
