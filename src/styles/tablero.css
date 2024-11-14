@@ -1,192 +1,262 @@
 .tablero-puntaje {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
 }
 
 .tablero-container {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .tablero-juego {
-    max-width: 440px;
-    margin: auto;
-    position: relative;
-    border: 10px solid rgb(76, 64, 255);
-    background-color: #1b186e;
+  max-width: 440px;
+  margin: auto;
+  position: relative;
+  border: 10px solid rgb(76, 64, 255);
+  background-color: #1b186e;
 }
 
 .fila {
-    display: flex;
-    width: 100%;
+  display: flex;
+  width: 100%;
 }
 
 .nivel-maximo {
-    width: 200px;
-    height: 140px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid rgb(62, 242, 255);
-    background-image: linear-gradient(to bottom, #1e3a8a, #3b82f6);
-    border-radius: 10px;
-    border-top: none;
-    margin: 0;
-    font-size: 6rem;
+  width: 200px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgb(62, 242, 255);
+  background-image: linear-gradient(to bottom, #1e3a8a, #3b82f6);
+  border-radius: 10px;
+  border-top: none;
+  margin: 0;
+  font-size: 6rem;
 }
 
 .tablero-nivel,
 .ficha-siguiente,
 .tabler-control,
 .ficha-guardada {
-    width: 12vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin: 0;
-    text-align: center;
+  width: 12vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+  text-align: center;
 }
 
 .tabler-punticos {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    margin: 0 4vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 0 4vw;
 }
 
 .ficha-siguiente {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin: 0;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+  text-align: center;
 }
 
 .reservi-titul {
-    margin: 0;
-    font-size: 2.9rem;
-    color: rgb(4, 238, 255);
-    font-weight: bold;
-    top: 17px;
-    position: relative;
+  margin: 0;
+  font-size: 2.9rem;
+  color: rgb(4, 238, 255);
+  font-weight: bold;
+  top: 17px;
+  position: relative;
 }
 
 .miniatura-pieza,
 .miniatura-pieza2 {
-    width: 200px;
-    height: 140px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid rgb(62, 242, 255);
-    background-image: linear-gradient(to bottom, #1e3a8a, #3b82f6);
-    border-radius: 10px;
-    border-top: none;
-    margin: 0;
+  width: 200px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgb(62, 242, 255);
+  background-image: linear-gradient(to bottom, #1e3a8a, #3b82f6);
+  border-radius: 10px;
+  border-top: none;
+  margin: 0;
 }
 
 .sin-reserva {
-    width: 200px;
-    height: 140px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid rgb(62, 242, 255);
-    background-image: linear-gradient(to bottom, #1e3a8a, #3b82f6);
-    border-radius: 10px;
-    border-top: none;
-    margin: 0;
-    font-size: 1.3rem;
+  width: 200px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgb(62, 242, 255);
+  background-image: linear-gradient(to bottom, #1e3a8a, #3b82f6);
+  border-radius: 10px;
+  border-top: none;
+  margin: 0;
+  font-size: 1.3rem;
 }
 
 
 .lista-control {
-    width: 200px;
-    height: 140px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid rgb(62, 242, 255);
-    background-image: linear-gradient(to bottom, #1e3a8a, #3b82f6);
-    border-radius: 10px;
-    border-top: none;
-    margin: 0;
-    flex-direction: column;
-    font-size: 1.2rem;
-    list-style-type: none;
+  width: 200px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgb(62, 242, 255);
+  background-image: linear-gradient(to bottom, #1e3a8a, #3b82f6);
+  border-radius: 10px;
+  border-top: none;
+  margin: 0;
+  flex-direction: column;
+  font-size: 1.2rem;
+  list-style-type: none;
 }
 
 .titul-siguiente,
 .titulo-nivel,
 .titul-control {
-    margin: 0;
-    font-size: 2.5rem;
-    color: rgb(4, 238, 255);
-    font-weight: bold;
-    top: 17px;
-    position: relative;
+  margin: 0;
+  font-size: 2.5rem;
+  color: rgb(4, 238, 255);
+  font-weight: bold;
+  top: 17px;
+  position: relative;
 }
 
 .fila-para-eliminar {
-    animation: fadeOut 0.5s ease forwards;
+  animation: fadeOut 0.5s ease forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
   }
-  
-  @keyframes fadeOut {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
+
+  100% {
+    opacity: 0;
   }
+}
 
 .animacion-activa {
-    animation: rotacion 1s ease-in-out;
-  }
-  
-  @keyframes rotacion {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+  animation: rotacion 1s ease-in-out;
+}
+
+@keyframes rotacion {
+  0% {
+    transform: rotate(0deg);
   }
 
-  @keyframes shake {
-    0%, 100% {
-      transform: translateX(0);
-    }
-    25% {
-      transform: translateX(-5px);
-    }
-    50% {
-      transform: translateX(5px);
-    }
-    75% {
-      transform: translateX(-5px);
-    }
+  100% {
+    transform: rotate(360deg);
   }
-  
-  .ficha-siguiente.shake-effect {
-    animation: shake 0.5s ease-in-out infinite;
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
   }
 
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px); /* Ajusta la distancia de subida/bajada según prefieras */
-    }
+  25% {
+    transform: translateX(-5px);
   }
-  
+
+  50% {
+    transform: translateX(5px);
+  }
+
+  75% {
+    transform: translateX(-5px);
+  }
+}
+
+.ficha-siguiente.shake-effect {
+  animation: shake 0.5s ease-in-out infinite;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.ficha-guardada {
+  animation: float 2s ease-in-out infinite;
+}
+
+@media (max-width: 1100px) {
+  .nivel-maximo {
+    font-size: 4rem;
+    width: 150px;
+    height: 100px;
+  }
+
+  .tablero-juego {
+    max-width: 80%;
+    margin: auto;
+    border: 8px solid rgb(76, 64, 255);
+  }
+
+  .tablero-nivel,
+  .ficha-siguiente,
+  .tabler-control,
   .ficha-guardada {
-    animation: float 2s ease-in-out infinite; /* Aplica la animación flotante */
+    width: 20vw;
+    font-size: 1.5rem;
   }
+
+  .tabler-punticos {
+    margin: 0 2vw;
+  }
+
+  .ficha-siguiente {
+    width: 100%;
+    font-size: 1.5rem;
+  }
+
+  .reservi-titul {
+    font-size: 2.5rem;
+  }
+
+  .miniatura-pieza,
+  .miniatura-pieza2,
+  .sin-reserva {
+    width: 150px;
+    height: 100px;
+  }
+
+  .lista-control {
+    width: 150px;
+    height: 100px;
+    font-size: 0.9rem;
+  }
+
+  .titul-siguiente,
+  .titulo-nivel,
+  .titul-control {
+    font-size: 2rem;
+  }
+
+  .tablero-pequeno {
+    max-width: 80%;
+    margin: auto;
+    border: 8px solid rgb(76, 64, 255);
+  }
+}

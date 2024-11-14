@@ -261,12 +261,12 @@ const Inicio = () => {
             setMensajeNivel('¡Nuevo Nivel!');
             setTimeout(() => {
                 setMensajeNivel('');
-            }, 2000); // El mensaje desaparece después de 2 segundos
+            }, 2000);
         }
     }, [puntaje, nivel]);
 
     useEffect(() => {
-        if (!juegoIniciado || juegoTerminado) return; // Pausa si el juego no ha iniciado o ha terminado
+        if (!juegoIniciado || juegoTerminado) return;
 
         const intervalo = setInterval(() => moverPiezaAbajo(), 1000 - (nivel - 1) * 100);
 
@@ -311,7 +311,7 @@ const Inicio = () => {
 
     const estiloFondo = {
         backgroundImage: `url(${fondo})`,
-        backgroundSize: "cover",
+        backgroundSize: "100% 100%",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         height: "100vh",
@@ -367,8 +367,7 @@ const Inicio = () => {
                 </div>
             )}
 
-            {/* Componente de audio que se reproduce cuando se inicia el juego */}
-            <audio ref={audioRef} src={audioFile} loop /> {/* Loop lo mantiene sonando en bucle */}
+            <audio ref={audioRef} src={audioFile} loop />
         </div>
     );
 };

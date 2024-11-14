@@ -18,42 +18,57 @@
 }
 
 .celda-activa-cuadrado {
-    background: linear-gradient(to bottom, #ff6347, #e5533d); /* Tomate */
+    background: linear-gradient(to bottom, #ff6347, #e5533d);
     box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.5), inset 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .celda-activa-L1 {
-    background: linear-gradient(to bottom, #4682b4, #356b8c); /* Azul acero */
+    background: linear-gradient(to bottom, #4682b4, #356b8c);
     box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.5), inset 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .celda-activa-L2 {
-    background: linear-gradient(to bottom, #32cd32, #28a828); /* Verde Lima */
+    background: linear-gradient(to bottom, #32cd32, #28a828);
     box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.5), inset 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .celda-activa-T {
-    background: linear-gradient(to bottom, #ff4500, #cc3700); /* Naranja Rojo */
+    background: linear-gradient(to bottom, #ff4500, #cc3700);
     box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.5), inset 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .celda-activa-linea {
-    background: linear-gradient(to bottom, #8a2be2, #6f23b3); /* Violeta */
+    background: linear-gradient(to bottom, #8a2be2, #6f23b3);
     box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.5), inset 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .celda-activa-S {
-    background: linear-gradient(to bottom, #00fa9a, #00c67a); /* Verde primavera */
+    background: linear-gradient(to bottom, #00fa9a, #00c67a);
     box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.5), inset 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .celda-activa-Z {
-    background: linear-gradient(to bottom, #ff1493, #cc117a); /* Rosa fuerte */
+    background: linear-gradient(to bottom, #ff1493, #cc117a);
     box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.5), inset 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilo para celdas ocupadas */
 .celda-ocupada {
-    background: linear-gradient(to bottom, #fbff00, #e0e000); /* Amarillo */
+    background: linear-gradient(to bottom, #fbff00, #e0e000);
     box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.5), inset 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 1100px) {
+
+    .celda-pieza {
+        width: 20px;
+        height: 20px;
+        display: none;
+    }
+
+    .celda {
+        width: 20px;
+        height: 20px;
+        box-sizing: border-box;
+        border: 1px solid rgba(0, 0, 0, 0.13);
+    }
 }

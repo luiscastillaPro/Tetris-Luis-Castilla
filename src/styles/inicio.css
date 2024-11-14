@@ -16,16 +16,18 @@
     text-align: center;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    animation: pulsate 1.5s ease-in-out infinite;  /* Aquí agregamos la animación pulsante */
+    animation: pulsate 1.5s ease-in-out infinite;
 }
 
-/* Definimos la animación pulsante */
 @keyframes pulsate {
-    0%, 100% {
-        transform: scale(1); /* Tamaño normal */
+
+    0%,
+    100% {
+        transform: scale(1);
     }
+
     50% {
-        transform: scale(1.1); /* Tamaño aumentado */
+        transform: scale(1.1);
     }
 }
 
@@ -96,6 +98,7 @@
         opacity: 0;
         transform: scale(0.8);
     }
+
     to {
         opacity: 1;
         transform: scale(1);
@@ -119,9 +122,11 @@
     0% {
         opacity: 0;
     }
+
     50% {
         opacity: 1;
     }
+
     100% {
         opacity: 0;
     }
@@ -141,15 +146,19 @@
 }
 
 @keyframes pulsateGameOver {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: scale(1);
     }
+
     50% {
-        transform: scale(1.05); /* Escala levemente el GIF */
+        transform: scale(1.05);
     }
 }
 
-.gif-game-over, .gif-play {
+.gif-game-over,
+.gif-play {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -168,8 +177,41 @@
     background-image: linear-gradient(to bottom, #208020, #32cd32);
 }
 
-.container-gifsito{
+.container-gifsito {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+@media (max-width: 1100px) {
+    .titulo-gamer {
+        font-size: 5rem;
+        margin-top: 3vh;
+    }
+
+    .btn-play,
+    .btn-reintentar {
+        font-size: 1.5rem;
+        padding: 0.8rem 2rem;
+    }
+
+    .btn-play-container {
+        width: 90%;
+        padding: 10px 0;
+    }
+
+    .gif-game-over,
+    .gif-play {
+        max-width: 80%;
+        margin-top: 0;
+        padding: 15px;
+    }
+
+    .mensaje-puntos {
+        font-size: 1.5rem;
+    }
+
+    .container-gifsito {
+        margin-top: 10px;
+    }
 }

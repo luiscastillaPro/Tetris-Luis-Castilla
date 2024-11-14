@@ -6,23 +6,22 @@ const TableroJuego = ({ pieza, tablero, piezaGuardada, siguientePieza, nivel }) 
   const [animacionActivada, setAnimacionActivada] = useState(false);
   const [shakeActivado, setShakeActivado] = useState(false);
 
-  // Función para activar el temblor
   const activarShake = () => {
     setShakeActivado(true);
-    setTimeout(() => setShakeActivado(false), 500); // Duración de la animación
+    setTimeout(() => setShakeActivado(false), 500);
   };
 
   useEffect(() => {
     if (nivel > 1) {
       setAnimacionActivada(true);
       setTimeout(() => setAnimacionActivada(false), 1000);
-      activarShake(); // Activa el temblor cuando cambia el nivel
+      activarShake(); 
     }
   }, [nivel]);
   
   useEffect(() => {
     if (siguientePieza) {
-      activarShake(); // Activa el temblor cada vez que cambia la pieza siguiente
+      activarShake();
     }
   }, [siguientePieza]);
 
