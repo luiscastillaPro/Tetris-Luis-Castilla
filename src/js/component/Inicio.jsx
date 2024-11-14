@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import TableroJuego from './TableroJuego.jsx';
 import MarcadorPuntaje from './MarcadorPuntaje.jsx';
 import Controles from './Controles.jsx';
 import fondo from "../../img/fondo.jpg";
 import "../../styles/inicio.css";
-// import Audio from "../../img/Tetris.mp3";
+import audioFile from "../../img/Tetris.mp3";
+import cryingImage from "../../img/giphy.gif";
+import guerrero from "../../img/200.gif";
 
 const piezasDisponibles = [
     {
@@ -58,6 +60,7 @@ const piezasDisponibles = [
 ];
 
 const Inicio = () => {
+    const audioRef = useRef(null);
     const filas = 25;
     const columnas = 14;
     const [tablero, setTablero] = useState(Array.from({ length: filas }, () => Array(columnas).fill(0)));
@@ -65,9 +68,12 @@ const Inicio = () => {
     const [puntaje, setPuntaje] = useState(0);
     const [juegoTerminado, setJuegoTerminado] = useState(false);
     const [nivel, setNivel] = useState(1);
+    const [cuentaRegresiva, setCuentaRegresiva] = useState(null);
     const [filasEliminadas, setFilasEliminadas] = useState(0);
-    const [juegoIniciado, setJuegoIniciado] = useState(false); 
+    const [mensajePuntos, setMensajePuntos] = useState('');
+    const [juegoIniciado, setJuegoIniciado] = useState(false);
     const [piezaGuardada, setPiezaGuardada] = useState(null);
+    const [mensajeNivel, setMensajeNivel] = useState('');
     const [pieza, setPieza] = useState(generarPiezaAleatoria());
     const [siguientePieza, setSiguientePieza] = useState(generarPiezaAleatoria());
 
@@ -78,6 +84,24 @@ const Inicio = () => {
             posicion: { x: Math.floor((columnas - piezaRandom.forma[0].length) / 2), y: 0 }
         };
     }
+
+    const iniciarCuentaRegresiva = () => {
+        setCuentaRegresiva(3);
+        let contador = 3;
+
+        const intervalo = setInterval(() => {
+            contador -= 1;
+            if (contador === 0) {
+                setCuentaRegresiva("¡Let's go!");
+            } else if (contador < 0) {
+                clearInterval(intervalo);
+                setCuentaRegresiva(null);
+                iniciarJuego();
+            } else {
+                setCuentaRegresiva(contador);
+            }
+        }, 1000);
+    };
 
     const moverPieza = (direccion) => {
         if (piezaFija) return;
@@ -112,8 +136,8 @@ const Inicio = () => {
     };
 
     const moverPiezaAbajo = () => {
-        if (juegoTerminado) return; 
-    
+        if (juegoTerminado) return;
+
         setPieza((prevPieza) => {
             let nuevaPosicion = { ...prevPieza.posicion };
             if (!colisionConFondo(prevPieza, { x: nuevaPosicion.x, y: nuevaPosicion.y + 1 })) {
@@ -142,20 +166,47 @@ const Inicio = () => {
     };
 
     const eliminarFilasCompletas = (tableroActual) => {
-        const nuevoTablero = tableroActual.filter(fila => fila.some(celda => celda === 0));
+        const filasCompletas = tableroActual.reduce((acumulador, fila, indice) => {
+            if (fila.every(celda => celda === 1)) {
+                acumulador.push(indice);
+            }
+            return acumulador;
+        }, []);
 
-        const filasEliminadasEstaVez = filas - nuevoTablero.length;
-
-        setFilasEliminadas(prev => prev + filasEliminadasEstaVez);
-
-        const puntajeNuevo = filasEliminadasEstaVez * 10;
-        setPuntaje(prev => prev + puntajeNuevo);
-
-        while (nuevoTablero.length < filas) {
-            nuevoTablero.unshift(new Array(columnas).fill(0));
+        if (filasCompletas.length === 0) {
+            return tableroActual;
         }
 
-        return nuevoTablero;
+        const puntosPorEliminar = filasCompletas.length * 100;
+        setFilasEliminadas(prev => prev + filasCompletas.length);
+        setPuntaje(prev => prev + puntosPorEliminar);
+
+        setMensajePuntos(`${puntosPorEliminar} Puntos`);
+
+        setTimeout(() => {
+            setMensajePuntos('');
+        }, 1500);
+
+        const tableroConAnimacion = tableroActual.map((fila, indice) => {
+            if (filasCompletas.includes(indice)) {
+                return fila.map(() => 1);
+            }
+            return fila;
+        });
+
+        setTablero(tableroConAnimacion);
+
+        setTimeout(() => {
+            const nuevoTablero = tableroActual.filter((_, indice) => !filasCompletas.includes(indice));
+
+            while (nuevoTablero.length < filas) {
+                nuevoTablero.unshift(new Array(columnas).fill(0));
+            }
+
+            setTablero(nuevoTablero);
+        }, 500);
+
+        return tableroActual;
     };
 
     const fijarPieza = (pieza) => {
@@ -179,6 +230,9 @@ const Inicio = () => {
         const nuevaPieza = siguientePieza;
         if (colisionConFondo(nuevaPieza, nuevaPieza.posicion)) {
             setJuegoTerminado(true);
+            if (audioRef.current) {
+                audioRef.current.pause();
+            }
         } else {
             setPieza(nuevaPieza);
             setSiguientePieza(generarPiezaAleatoria());
@@ -202,10 +256,14 @@ const Inicio = () => {
     };
 
     useEffect(() => {
-        if (filasEliminadas >= 10 * nivel) {
+        if (puntaje >= nivel * 1000) {
             setNivel((prevNivel) => prevNivel + 1);
+            setMensajeNivel('¡Nuevo Nivel!');
+            setTimeout(() => {
+                setMensajeNivel('');
+            }, 2000); // El mensaje desaparece después de 2 segundos
         }
-    }, [filasEliminadas, nivel]);
+    }, [puntaje, nivel]);
 
     useEffect(() => {
         if (!juegoIniciado || juegoTerminado) return; // Pausa si el juego no ha iniciado o ha terminado
@@ -230,6 +288,11 @@ const Inicio = () => {
     }, [pieza, piezaGuardada, nivel, juegoIniciado, juegoTerminado]);
 
     const iniciarJuego = () => {
+        if (audioRef.current) {
+            audioRef.current.volume = 0.1;
+            audioRef.current.play();
+        }
+
         setJuegoIniciado(true);
         setJuegoTerminado(false);
         setPuntaje(0);
@@ -242,7 +305,8 @@ const Inicio = () => {
     };
 
     const reiniciarJuego = () => {
-        iniciarJuego();
+        iniciarCuentaRegresiva();
+        setPiezaFija(false);
     };
 
     const estiloFondo = {
@@ -255,10 +319,17 @@ const Inicio = () => {
 
     return (
         <div className="app" style={estiloFondo}>
-            {!juegoIniciado ? (
-                <button onClick={iniciarJuego} className="btn-play">Play</button>
+            {!juegoIniciado && !cuentaRegresiva ? (
+                <div className='container-gifsito'>
+                    <img src={guerrero} alt="Guerrero GIF" className="gif-play" />
+                <button onClick={iniciarCuentaRegresiva} className="btn-play">
+                    Play
+                </button>
+
+                </div>
             ) : juegoTerminado ? (
                 <div className="game-over">
+                    <img src={cryingImage} alt="Crying GIF" className="gif-game-over" />
                     <h1 className='titulo-gamer'>Game Over</h1>
                     <button onClick={reiniciarJuego} className="btn-reintentar">Volver a Intentarlo</button>
                 </div>
@@ -277,6 +348,27 @@ const Inicio = () => {
                     <Controles moverPieza={moverPieza} />
                 </>
             )}
+
+            {cuentaRegresiva && (
+                <div className="modal-cuenta-regresiva">
+                    <div className="texto-cuenta">{cuentaRegresiva}</div>
+                </div>
+            )}
+
+            {mensajePuntos && (
+                <div className="mensaje-puntos">
+                    {mensajePuntos}
+                </div>
+            )}
+
+            {mensajeNivel && (
+                <div className="mensaje-nivel">
+                    {mensajeNivel}
+                </div>
+            )}
+
+            {/* Componente de audio que se reproduce cuando se inicia el juego */}
+            <audio ref={audioRef} src={audioFile} loop /> {/* Loop lo mantiene sonando en bucle */}
         </div>
     );
 };

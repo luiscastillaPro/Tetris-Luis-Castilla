@@ -1,14 +1,19 @@
 .puntajes {
-    width: 12rem;
-    font-weight: bold;
-    border: 5px solid #1b186e;
+    width: 200px;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgb(62, 242, 255);
+    background-image: linear-gradient(to bottom, #1e3a8a, #3b82f6);
+    border-radius: 10px;
+    margin: 0;
     font-size: 2rem;
-    height: 7rem;
 }
 
 .puntajes-titul {
     color: rgb(4, 238, 255);
-    background-color: #1b186e;
     font-size: 1.5rem;
     padding: 0.5rem 0;
     font-weight: bold;

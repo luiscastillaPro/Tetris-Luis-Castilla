@@ -27,26 +27,43 @@ module.exports = {
   },
   module: {
     rules: [
-        {
-          test: /\.(js|jsx)$/,
-          exclude: /node_modules/,
-          use: ['babel-loader']
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: ['babel-loader'],
+      },
+      {
+        test: /\.(css)$/,
+        use: [
+          {
+            loader: 'style-loader', // crea nodos de estilo a partir de cadenas JS
+          },
+          {
+            loader: 'css-loader', // traduce CSS a CommonJS
+          },
+        ],
+      }, // archivos CSS
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: {
+          loader: 'file-loader',
+          options: { name: '[name].[ext]' },
         },
-        {
-          test: /\.(css)$/, use: [{
-              loader: "style-loader" // creates style nodes from JS strings
-          }, {
-              loader: "css-loader" // translates CSS into CommonJS
-          }]
-        }, //css only files
-        { 
-          test: /\.(png|svg|jpg|gif)$/, use: {
-            loader: 'file-loader',
-            options: { name: '[name].[ext]' } 
-          }
-        }, //for images
-        { test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/, use: ['file-loader'] } //for fonts
-    ]
+      }, // para imágenes
+      {
+        test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
+        use: ['file-loader'],
+      }, // para fuentes
+      {
+        test: /\.mp3$/, // Para archivos de audio MP3
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: 'assets/audio/[name].[hash:8].[ext]', // El archivo de audio se moverá a la carpeta 'assets/audio'
+          },
+        },
+      },
+    ],
   },
   resolve: {
     extensions: ['*', '.js', '.jsx']

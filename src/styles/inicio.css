@@ -5,14 +5,7 @@
     align-items: center;
 }
 
-.titulo-gamer,
-.btn-play {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-}
-
-.btn-reintentar,
-.btn-play {
+.btn-reintentar {
     background-image: linear-gradient(to bottom, #208020, #32cd32);
     color: white;
     font-size: 2rem;
@@ -22,6 +15,32 @@
     font-weight: bold;
     text-align: center;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    animation: pulsate 1.5s ease-in-out infinite;  /* Aquí agregamos la animación pulsante */
+}
+
+/* Definimos la animación pulsante */
+@keyframes pulsate {
+    0%, 100% {
+        transform: scale(1); /* Tamaño normal */
+    }
+    50% {
+        transform: scale(1.1); /* Tamaño aumentado */
+    }
+}
+
+.btn-play {
+    animation: pulsate 1.5s ease-in-out infinite;
+    background-image: linear-gradient(to bottom, #208020, #32cd32);
+    color: white;
+    font-size: 2rem;
+    padding: 1rem 3rem;
+    border: 3px solid white;
+    border-radius: 10px;
+    font-weight: bold;
+    text-align: center;
+    max-width: 200px;
+    margin-top: 5vh;
     transition: background-color 0.3s ease;
 }
 
@@ -35,7 +54,7 @@
     font-weight: bold;
     color: white;
     text-align: center;
-    margin-top: 0;
+    margin-top: 5vh;
 }
 
 .app {
@@ -49,4 +68,108 @@
 .contenedor-juego {
     display: flex;
     justify-content: space-between;
+}
+
+.modal-cuenta-regresiva {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    backdrop-filter: blur(5px);
+}
+
+.texto-cuenta {
+    font-size: 5rem;
+    color: white;
+    font-weight: bold;
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.mensaje-puntos {
+    position: fixed;
+    top: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px;
+    border-radius: 5px;
+    animation: fadeInOut 1.5s;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.mensaje-nivel {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    color: #ffffff;
+    background-color: rgb(255, 0, 0);
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 10;
+}
+
+@keyframes pulsateGameOver {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05); /* Escala levemente el GIF */
+    }
+}
+
+.gif-game-over, .gif-play {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -50px;
+    animation: fadeInGameOver 1s ease;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+    border: 5px solid rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    padding: 20px;
+}
+
+.btn-play:hover {
+    background-image: linear-gradient(to bottom, #208020, #32cd32);
+}
+
+.container-gifsito{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
