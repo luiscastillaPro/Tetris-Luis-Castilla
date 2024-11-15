@@ -5,6 +5,8 @@ import Controles from './Controles.jsx';
 import fondo from "../../img/fondo.jpg";
 import "../../styles/inicio.css";
 import audioFile from "../../img/Tetris.mp3";
+import gameOverSound from "../../img/gameover.mp3";
+import bienvenidaSound from "../../img/bienvenida.mp3";
 import cryingImage from "../../img/giphy.gif";
 import guerrero from "../../img/200.gif";
 
@@ -61,6 +63,9 @@ const piezasDisponibles = [
 
 const Inicio = () => {
     const audioRef = useRef(null);
+    const gameOverAudioRef = useRef(null);
+    const bienvenidaAudioRef = useRef(null);
+    const [isMuted, setIsMuted] = useState(false);
     const filas = 25;
     const columnas = 14;
     const [tablero, setTablero] = useState(Array.from({ length: filas }, () => Array(columnas).fill(0)));
@@ -86,6 +91,11 @@ const Inicio = () => {
     }
 
     const iniciarCuentaRegresiva = () => {
+        if (bienvenidaAudioRef.current) {
+            bienvenidaAudioRef.current.pause();
+            bienvenidaAudioRef.current.currentTime = 0;
+        }
+
         setCuentaRegresiva(3);
         let contador = 3;
 
@@ -121,6 +131,26 @@ const Inicio = () => {
             return prevPieza;
         });
     };
+
+
+
+    const toggleMute = () => {
+        setIsMuted(prevState => !prevState);
+    };
+
+    useEffect(() => {
+        // Si el mute está activado, silencia todos los audios
+        if (isMuted) {
+            if (audioRef.current) audioRef.current.muted = true;
+            if (gameOverAudioRef.current) gameOverAudioRef.current.muted = true;
+            if (bienvenidaAudioRef.current) bienvenidaAudioRef.current.muted = true;
+        } else {
+            // Si no está activado, restaura los audios
+            if (audioRef.current) audioRef.current.muted = false;
+            if (gameOverAudioRef.current) gameOverAudioRef.current.muted = false;
+            if (bienvenidaAudioRef.current) bienvenidaAudioRef.current.muted = false;
+        }
+    }, [isMuted]);
 
     const manejarReservaPieza = () => {
         setPieza((prevPieza) => {
@@ -229,9 +259,17 @@ const Inicio = () => {
     const generarNuevaPieza = () => {
         const nuevaPieza = siguientePieza;
         if (colisionConFondo(nuevaPieza, nuevaPieza.posicion)) {
-            setJuegoTerminado(true);
+            setJuegoTerminado(true); // Cambia el estado a 'juegoTerminado'
+
+            // Pausa el audio principal
             if (audioRef.current) {
                 audioRef.current.pause();
+            }
+
+            // Reproduce el sonido de Game Over si aún no se está reproduciendo
+            if (gameOverAudioRef.current) {
+                gameOverAudioRef.current.currentTime = 0; // Reinicia el sonido
+                gameOverAudioRef.current.play();
             }
         } else {
             setPieza(nuevaPieza);
@@ -239,6 +277,7 @@ const Inicio = () => {
             setPiezaFija(false);
         }
     };
+
 
     const bajarPiezaRapidamente = () => {
         setPieza((prevPieza) => {
@@ -256,6 +295,14 @@ const Inicio = () => {
     };
 
     useEffect(() => {
+        if (juegoTerminado && gameOverAudioRef.current) {
+            gameOverAudioRef.current.volume = 0.1; // Reducir volumen
+            gameOverAudioRef.current.currentTime = 0;
+            gameOverAudioRef.current.play();
+        }
+    }, [juegoTerminado]);
+
+    useEffect(() => {
         if (puntaje >= nivel * 1000) {
             setNivel((prevNivel) => prevNivel + 1);
             setMensajeNivel('¡Nuevo Nivel!');
@@ -264,6 +311,14 @@ const Inicio = () => {
             }, 2000);
         }
     }, [puntaje, nivel]);
+
+    useEffect(() => {
+        if (!juegoIniciado && !cuentaRegresiva && bienvenidaAudioRef.current) {
+            bienvenidaAudioRef.current.volume = 0.3;
+            bienvenidaAudioRef.current.currentTime = 0;
+            bienvenidaAudioRef.current.play();
+        }
+    }, [juegoIniciado, cuentaRegresiva]);
 
     useEffect(() => {
         if (!juegoIniciado || juegoTerminado) return;
@@ -305,8 +360,20 @@ const Inicio = () => {
     };
 
     const reiniciarJuego = () => {
+        if (bienvenidaAudioRef.current) {
+            bienvenidaAudioRef.current.pause();
+            bienvenidaAudioRef.current.currentTime = 0;
+            bienvenidaAudioRef.current.play();
+        }
         iniciarCuentaRegresiva();
         setPiezaFija(false);
+    };
+
+    const handleBienvenidaAudioEnd = () => {
+        if (bienvenidaAudioRef.current) {
+            bienvenidaAudioRef.current.currentTime = 0;
+            bienvenidaAudioRef.current.play();
+        }
     };
 
     const estiloFondo = {
@@ -321,11 +388,14 @@ const Inicio = () => {
         <div className="app" style={estiloFondo}>
             {!juegoIniciado && !cuentaRegresiva ? (
                 <div className='container-gifsito'>
-                    <img src={guerrero} alt="Guerrero GIF" className="gif-play" />
-                <button onClick={iniciarCuentaRegresiva} className="btn-play">
-                    Play
-                </button>
+                    <h1 className="bienvenida">
+                        "Bienvenido a este maravilloso mundo del Tetris"
+                    </h1>
 
+                    <img src={guerrero} alt="Guerrero GIF" className="gif-play" />
+                    <button onClick={iniciarCuentaRegresiva} className="btn-play">
+                        Play
+                    </button>
                 </div>
             ) : juegoTerminado ? (
                 <div className="game-over">
@@ -367,7 +437,17 @@ const Inicio = () => {
                 </div>
             )}
 
+            <div className="mute-button" onClick={toggleMute}>
+                {isMuted ? '🔇' : '🎵'}
+            </div>
+
+            <footer className="footer">
+                @Este juego es elaborado por Luis Castilla 2024
+            </footer>
+
+            <audio ref={bienvenidaAudioRef} src={bienvenidaSound} onEnded={handleBienvenidaAudioEnd} />
             <audio ref={audioRef} src={audioFile} loop />
+            <audio ref={gameOverAudioRef} src={gameOverSound} />
         </div>
     );
 };
