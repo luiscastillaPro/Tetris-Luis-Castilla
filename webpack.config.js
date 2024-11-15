@@ -22,7 +22,7 @@ module.exports = {
   ],
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'public'),
+    path: path.resolve(__dirname, 'build'),
     publicPath: '/'
   },
   module: {
@@ -75,7 +75,7 @@ module.exports = {
     allowedHosts: "all",
     historyApiFallback: true,
     static: {
-      directory: path.resolve(__dirname, "dist"),
+      directory: path.resolve(__dirname, "build"),
     },
     client: {
       webSocketURL: publicUrl
